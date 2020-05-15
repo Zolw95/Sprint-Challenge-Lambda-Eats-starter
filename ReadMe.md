@@ -13,8 +13,53 @@ Demonstrate your understanding of this week's concepts by answering the followin
 Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your Team Lead.
 
 1. In 1-2 sentences, explain what React's `useRouteMatch` hook is used for.
+
+- The react's useRouteMatch hook is used for getting acccess to the match data without rendering a <Route>.
+
+DOCS Example:
+
+With Render (No hook)
+
+import { Route } from "react-router-dom";
+
+function BlogPost() {
+  return (
+    < Route
+      path="/blog/:slug"
+      render={({ match }) => {
+        // Do whatever you want with the match...
+        return < div />;
+      }}
+    />
+  );
+}
+
+
+Using useRouteMatch Hook
+
+import { useRouteMatch } from "react-router-dom";
+
+function BlogPost() {
+  let match = useRouteMatch("/blog/:slug");
+
+  // Do whatever you want with the match...
+  return < div />;
+}
+
+///////////////////////////////////////////////////////////////////////
+
 2. How would you explain form validation to someone who has never programmed before?
+
+Form validation is a process of checking that a form you are interacting with has been filled in correctly before it is processed.
+
+
+///////////////////////////////////////////////////////////////////////
+
 3. In 1-2 sentences, define end to end testing.
+
+End to end testing is a test of the entire application in a real-world scenario. For example, communicating with the database, network, hardware and other applications.
+
+Example: Let's say there is a form that takes in an email address and password that logs you in to your Mailbox. The first step would be to check if the login process works by logging in to your mailbox and then trying to access your mailbox after login.
 
 You are expected to be able to answer all these questions. Your responses contribute to your Sprint Challenge grade. Skipping this section **will** prevent you from passing this challenge.
 
@@ -24,14 +69,14 @@ You are expected to be able to answer all these questions. Your responses contri
 
 Follow these steps to set up and work on your project:
 
-- [ ] Create a forked copy of this project.
-- [ ] Add your project manager as collaborator on Github.
-- [ ] Clone your OWN version of the repository (Not Lambda's by mistake!).
-- [ ] CD into the project base directory.
-- [ ] Download project dependencies by running `npm install`
-- [ ] Start up the app using `npm start`
-- [ ] Create a new branch: git checkout -b `<firstName-lastName>`. Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly.
-- [ ] Push commits: git push origin `<firstName-lastName>`.
+- [X] Create a forked copy of this project.
+- [X] Add your project manager as collaborator on Github.
+- [X] Clone your OWN version of the repository (Not Lambda's by mistake!).
+- [X] CD into the project base directory.
+- [X] Download project dependencies by running `npm install`
+- [X] Start up the app using `npm start`
+- [X] Create a new branch: git checkout -b `<firstName-lastName>`. Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly.
+- [X] Push commits: git push origin `<firstName-lastName>`.
 
 ### Task 2: Minimum Viable Product
 

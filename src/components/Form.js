@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from './Header';
 import '../Form.css'
 import axios from 'axios';
+import * as yup from 'yup';
 
 export default function Form() {
 
@@ -11,15 +12,43 @@ export default function Form() {
         pizzasauce: "",
         instructions: "",
         toppings: [],
-        id: "",
-        createdAt: ""
     }
+
 
     // State for Axios Post
     const [post, setPost] = useState([]);
 
     // State for the form
     const [formState, setFormState] = useState(initialFormState);
+
+    // State for errors
+    const [errors, setErrors] = useState(initialFormState);
+
+    // Set up FORM SCHEMA for all validation - check if key value is valid
+    const formSchema = yup.object().shape({
+        name: yup.string().required("Name is a required field and requires at least two characters"),
+        pizzasize: yup.string().required("Pizza Size is a required field"),
+        pizzasauce: yup.string().required("Pizza Sauce is a required field"),
+        instructions: yup.string()
+    });
+
+    // Validation for each input
+    const validateChange = e => {
+        yup
+        // Read the value of schema key using name of input
+        .reach(formSchema, e.target.name)
+        // Validate the value of input
+        .validate(e.target.value)
+        // If the validation passes, clear all errors
+        .then(valid => {
+            setErrors({ ...errors, [e.target.name]: "" });
+        })
+        .catch(err => {
+            setErrors({ ...errors, [e.target.name]: err.errors[0] });
+        });
+    };
+
+
 
 
     // Submit POST Request by sending formState
@@ -44,11 +73,15 @@ export default function Form() {
         e.persist();
         const newFormData = {
             ...formState,
-            [e.target.name]: e.target.value
+            [e.target.name]: [e.target.value]
         };
+        //Validates every change in every input
+        validateChange(e);
         // Update state with new data
         setFormState(newFormData);
     }
+
+
 
     // Update Selected Toppings
     const inputChangeToppings = e => {
@@ -66,6 +99,8 @@ export default function Form() {
                 ...formState,
                 ["toppings"]: toppings
             };
+            //Validates every change in every input
+            // validateChange(e);
             // Update state with new Data 
             setFormState(newFormData)
     }
@@ -80,11 +115,13 @@ export default function Form() {
                     <br />
                     <input
                         type="text"
+                        minLength="2"
                         name="name"
                         onChange={inputChange}
                         placeholder="Your Name"
                         data-cy="name"
                     />
+                    {errors.name.length > 1 ? <p className="error">{errors.name}</p> : null}
                 </label>
                 <br />
                 <br />
@@ -305,7 +342,7 @@ export default function Form() {
                     >
                 </input>
                 <pre>{JSON.stringify(post, null, 2)}</pre>    
-                <button onClick={submitForm} type="submit">
+                <button type="submit" type="submit">
                     Add To Order
                 </button>
             </form>

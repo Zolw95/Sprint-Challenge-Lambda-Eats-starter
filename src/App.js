@@ -10,10 +10,6 @@ const App = () => {
         <Header />
       </div>
       <div className="body">
-        <Router>
-          <Route path="/pizza" component={Form}>
-          </Route>
-        </Router>
       </div>
     </div>
   );

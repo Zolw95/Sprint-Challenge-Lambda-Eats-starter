@@ -5,6 +5,27 @@ import '../Header.css';
 
 export default function Header() {
 
+    return (
+        <header>
+            <div className="main-heading">
+                <h1>Lambda Eats</h1>
+            </div>
+            <div className="main-links">
+                <Router>
+                    <Route exact path="/">
+                        <Link exact to='/'>Home</Link>
+                        <Link to='/pizza'>Build Your Pizza</Link>
+                    </Route>
+                    <Route path='/pizza' component={Form}>
+                        <Link to='/pizza' component={Form}>Build Your Pizza</Link>
+                        <Link exact to='/'>Home</Link>
+                    </Route>
+                </Router>
+            </div>
+        </header>
+    );
+}
+
 {/* <Router>
     <Route exact path="/">
         <Link to='/'>Home</Link>
@@ -15,24 +36,3 @@ export default function Header() {
         <Link to='/pizza'>Build Your Pizza</Link>
     </Route>
 </Router> */}
-
-    return (
-        <header>
-            <div className="main-heading">
-                <h1>Lambda Eats</h1>
-            </div>
-            <div className="main-links">
-                <Router>
-                    <Route exact path="/">
-                        <Link to='/'>Home</Link>
-                        <Link to='/pizza'>Build Your Pizza</Link>
-                    </Route>
-                    <Route path='/pizza' component={Form}>
-                        <Link to='/'>Home</Link>
-                        <Link to='/pizza'>Build Your Pizza</Link>
-                    </Route>
-                </Router>
-            </div>
-        </header>
-    );
-}

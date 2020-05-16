@@ -1,0 +1,22 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 5%;
+}
+
+header div.main-links {
+    display: flex;
+}
+
+header div.main-heading {
+    padding-bottom: 10px;
+}
+
+header div.main-links a {
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    border: 1px solid white;
+    padding: 5px 15px;
+}
